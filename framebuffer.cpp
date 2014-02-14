@@ -25,7 +25,7 @@ unsigned short * FrameBuffer::getValueBuffer()
   return m_value;
 }
 
-unsigned int * FrameBuffer::getShortBuffer()
+unsigned int * FrameBuffer::getIndexBuffer()
 {
   return m_index;
 }

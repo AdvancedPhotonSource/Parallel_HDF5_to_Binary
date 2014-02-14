@@ -2,13 +2,15 @@ CC = g++
 
 CXXFLAGS = -Wall -g -fPIC
 
-BOOST_BASE = /local/fkhan/local/boost_1_53_0-shared/
+BOOST_BASE = /local/fkhan/local/boost_1_53_0-shared
 
-INCLUDES = -I${BOOST_BASE}/INCLUDE
+H5_BASE = /local/fkhan/local/hdf5-1.8.12
 
-LFLAGS = -L${BOOST_BASE}/lib
+INCLUDES = -I${BOOST_BASE}/include -I${H5_BASE}/include
 
-LIBS = -lboost_thread -lboost_system
+LFLAGS = -L${BOOST_BASE}/lib -L${H5_BASE}/lib
+
+LIBS = -lboost_thread-mt -lboost_thread -lboost_system -lhdf5
 
 SRCS = $(wildcard *.cpp)
 

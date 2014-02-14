@@ -9,7 +9,7 @@ template <class T>
 class Queue {
   
 public:
- T& pop();
+  T pop();
   void push(const T& item);
 
 private:
@@ -21,7 +21,7 @@ private:
 };
 
 template <class T>
-T& Queue<T>::pop()
+T Queue<T>::pop()
 {
   boost::unique_lock<boost::mutex> lock(m_mutex);
   while (m_queue.empty())

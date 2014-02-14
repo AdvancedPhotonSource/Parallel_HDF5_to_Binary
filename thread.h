@@ -11,7 +11,7 @@ public:
   
   virtual ~Thread();
 
-  void inerrupt();
+  void interrupt();
 
   void start();
 
@@ -27,6 +27,9 @@ protected:
 
 private:
 
-  boost::shared_ptr<boost::thread> thread m_thread;
+  boost::shared_ptr<boost::thread> m_thread;
+
   bool m_running;
-}
+};
+
+#endif
