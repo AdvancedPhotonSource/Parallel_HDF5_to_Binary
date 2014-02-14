@@ -5,6 +5,8 @@
 #include <boost/thread/condition_variable.hpp>
 #include <queue>
 
+#include <stdio.h>
+
 template <typename T>
 class Queue {
   
@@ -30,17 +32,11 @@ T Queue<T>::pop()
   
   while (m_queue.size() == 0)
   {
-    printf("Locking\n");
     m_condition.wait(lock);
-    printf("Woken %d\n", m_queue.size());  
   }
-
-  printf("Woken 2\n");
 
   T val = m_queue.front();
   m_queue.pop();
-
-  //printf("Popd %d\n", m_queue.size());
 
   return val;
 }
@@ -54,7 +50,6 @@ void Queue<T>::push(const T& item)
   lock.unlock();
   m_condition.notify_one();
 
-  //printf("Pushed %d\n", m_queue.size());  
 }
 
 template <typename T>

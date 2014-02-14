@@ -11,10 +11,12 @@
 
 Writer::Writer(std::string filepath,
                Queue<FrameBuffer *> *srcQueue,
-               BufferPool *bufferPool)
+               BufferPool *bufferPool,
+               unsigned int frames)
 : m_filepath(filepath),
   m_srcQueue(srcQueue),
-  m_bufferPool(bufferPool)
+  m_bufferPool(bufferPool),
+  m_frames(frames)
 {
   setup();
 }
@@ -38,7 +40,10 @@ void Writer::run()
 {
   if (m_fd < 0) return;
 
-  while (isRunning()) {
+  unsigned int frameswrote = 0;
+
+  while (frameswrote < m_frames) {
+
     FrameBuffer *buffer = m_srcQueue->pop();
 
     int n = 0;
@@ -61,7 +66,19 @@ void Writer::run()
     } while (n < vsize);
 
     // Final step, return the buffer for reuse. 
+    // printf("(Writer) Frmae = %d\n", frameswrote);
+
+    // for (int i = 0 ; i < 10 ; i++)
+    // {
+    //   printf("%d ", buffer->getValueBuffer()[i]);
+    // }
+
+    // printf("\n");
+
     m_bufferPool->put(buffer);
 
+    frameswrote += buffer->getFramesPerBuffer();
   }
+
+  close(m_fd);
 }

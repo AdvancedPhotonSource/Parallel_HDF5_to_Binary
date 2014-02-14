@@ -12,10 +12,14 @@ public:
 
   unsigned int* getIndexBuffer();
 
+  unsigned int getFramesPerBuffer();
+
   unsigned int getStart();
+
   void setStart(unsigned int s);
 
   unsigned int getSize();
+  
   void setSize(unsigned int s);
   
 private:

@@ -50,7 +50,6 @@ private:
   hid_t m_spaceID;
   hid_t m_memspaceID;
 
-
   void setup();
 
 };

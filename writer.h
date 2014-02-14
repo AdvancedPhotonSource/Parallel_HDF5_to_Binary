@@ -16,7 +16,8 @@ public:
 
   Writer(std::string filepath, 
         Queue<FrameBuffer *> *srcQueue,
-        BufferPool *bufferPool);
+        BufferPool *bufferPool,
+        unsigned int frames);
 
   ~Writer();
 
@@ -33,6 +34,8 @@ private:
   BufferPool *m_bufferPool;
 
   int m_fd;
+
+  unsigned int m_frames;
 
   void setup();
 

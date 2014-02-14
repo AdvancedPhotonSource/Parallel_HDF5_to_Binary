@@ -18,6 +18,8 @@ void FrameBuffer::alloc()
 {
   m_value = new unsigned short[m_dimX * m_dimY * m_framesInBuffer];
   m_index = new unsigned int[m_dimX * m_dimY * m_framesInBuffer];
+  m_start = 0;
+  m_size = m_dimX * m_dimY * m_framesInBuffer;
 }
 
 unsigned short * FrameBuffer::getValueBuffer()
@@ -28,6 +30,11 @@ unsigned short * FrameBuffer::getValueBuffer()
 unsigned int * FrameBuffer::getIndexBuffer()
 {
   return m_index;
+}
+
+unsigned int FrameBuffer::getFramesPerBuffer()
+{
+  return m_framesInBuffer;
 }
 
 unsigned int FrameBuffer::getStart()

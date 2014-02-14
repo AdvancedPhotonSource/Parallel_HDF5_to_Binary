@@ -11,7 +11,9 @@ class Converter : public Thread
 {
 public: 
 
-  Converter(Queue<FrameBuffer *> *srcQueue, Queue<FrameBuffer *> *destQueu);
+  Converter(Queue<FrameBuffer *> *srcQueue, 
+            Queue<FrameBuffer *> *destQueu,
+            unsigned int frames);
 
   ~Converter();
 
@@ -23,6 +25,8 @@ private:
 
   Queue<FrameBuffer *> *m_srcQueue;
   Queue<FrameBuffer *> *m_destQueue;
+
+  unsigned int m_frames;
 
 };
 

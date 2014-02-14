@@ -4,7 +4,6 @@
 Producer::Producer(Queue<int> *queue)
 : m_queue(queue)
 {
-
 }
 
 Producer::~Producer()
@@ -15,7 +14,7 @@ Producer::~Producer()
 
 void Producer::run()
 {
-  for (int i = 0 ; i < 100 * 100 ; i++)
+  for (int i = 0 ; i < 10 ; i++)
   {
     printf("Producing %d\n", i);
     m_queue->push(i);

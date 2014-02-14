@@ -1,4 +1,5 @@
 #include "thread.h"
+#include <stdio.h>
 
 Thread::Thread()
 : m_running(false)
@@ -50,4 +51,9 @@ void Thread::stop()
   }
  
    m_running = false; 
+}
+
+void Thread::join()
+{
+  m_thread->join();
 }

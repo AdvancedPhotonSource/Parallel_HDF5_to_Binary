@@ -69,6 +69,18 @@ void Reader::run()
     
     herr_t errstatus = H5Sselect_hyperslab(m_spaceID, H5S_SELECT_SET, offset, NULL, m_count, NULL);
     hid_t status = H5Dread(m_datasetID, HDF5_datatype, m_memspaceID, m_spaceID, H5P_DEFAULT, valuebuffer);
+
+    // printf("(Reader) Frame = %d\n", offset[0]);
+    // for ( int i = 0 ; i < 10; i++)
+    // {
+    //   printf("%d ", valuebuffer[i]);
+    // }
+
+    // printf("\n");
+    
+    buffer->setStart(0);
+    buffer->setSize(m_dims[1] * m_dims[2] * m_count[0]);
+    
     m_destQueue->push(buffer);
   }
 }

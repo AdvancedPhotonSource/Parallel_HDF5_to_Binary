@@ -1,10 +1,12 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
 
+#include "thread.h"
+
 template <typename T>
 class Queue;
 
-class Producer
+class Producer : public Thread
 {
 
 public:
