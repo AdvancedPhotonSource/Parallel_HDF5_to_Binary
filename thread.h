@@ -17,6 +17,8 @@ public:
 
   void stop();
 
+  void join();
+  
   bool isRunning();
   
 protected:

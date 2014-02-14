@@ -8,6 +8,7 @@ Thread::Thread()
 
 Thread::~Thread()
 {
+  printf("Thread dead!\n");
 }
 
 void Thread::interrupt()
@@ -45,7 +46,7 @@ void Thread::stop()
     boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(5000);
       
     // Wait for thread to finish
-    m_thread -> timed_join(timeout);
+    m_thread->timed_join(timeout);
   }
  
    m_running = false; 

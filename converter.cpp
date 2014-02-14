@@ -12,8 +12,7 @@ Converter::Converter(Queue<FrameBuffer *> *srcQueue,
 
 Converter::~Converter()
 {
-
-
+  printf("Converter finished\n");
 }
 
 void Converter::run()
@@ -21,26 +20,30 @@ void Converter::run()
   
   while (isRunning())
   {
-    FrameBuffer *buffer = m_srcQueue->pop();
-    unsigned short *valueBuffer = buffer->getValueBuffer();
-    unsigned int *indexBuffer = buffer->getIndexBuffer();
+    
+    m_srcQueue->pop();
 
-    unsigned int indexSparse = 0;
+    printf("Converter go the buffer\n");
 
-    for (unsigned int i = buffer->getStart() ; i < buffer->getSize() ; i++)
-    {
-      if (valueBuffer[i] != 0) 
-      {
-        indexBuffer[indexSparse] = i;
-        valueBuffer[indexSparse] = valueBuffer[i];
-        indexSparse++;
-      }
-    }
+    // unsigned short *valueBuffer = buffer->getValueBuffer();
+    // unsigned int *indexBuffer = buffer->getIndexBuffer();
 
-    buffer->setStart(0);
-    buffer->setSize(indexSparse);
+    // unsigned int indexSparse = 0;
 
-    m_destQueue->push(buffer);
+    // for (unsigned int i = buffer->getStart() ; i < buffer->getSize() ; i++)
+    // {
+    //   if (valueBuffer[i] != 0) 
+    //   {
+    //     indexBuffer[indexSparse] = i;
+    //     valueBuffer[indexSparse] = valueBuffer[i];
+    //     indexSparse++;
+    //   }
+    // }
+
+    // buffer->setStart(0);
+    // buffer->setSize(indexSparse);
+
+    // m_destQueue->push(buffer);
   }
 
 }

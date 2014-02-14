@@ -66,8 +66,9 @@ void Reader::run()
     // Might block if there is no buffer in the pool. 
     FrameBuffer *buffer = m_pool->take();
     unsigned short *valuebuffer = buffer->getValueBuffer();
-
+    
     herr_t errstatus = H5Sselect_hyperslab(m_spaceID, H5S_SELECT_SET, offset, NULL, m_count, NULL);
     hid_t status = H5Dread(m_datasetID, HDF5_datatype, m_memspaceID, m_spaceID, H5P_DEFAULT, valuebuffer);
+    m_destQueue->push(buffer);
   }
 }

@@ -42,9 +42,6 @@ private:
   BufferPool *m_pool;
   Queue<FrameBuffer *> *m_destQueue;
 
-  // File descriptor
-  int m_fd;
-
   hsize_t m_dims[3];
   hsize_t m_chunk[3];
   hsize_t m_count[3];

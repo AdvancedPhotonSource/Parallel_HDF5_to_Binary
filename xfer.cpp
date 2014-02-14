@@ -10,36 +10,55 @@
 #include "writer.h"
 #include "converter.h"
 
-void usage(char* prg)
-{
-  printf("Usage: %s h5file immfile dataset_name buffer_count frames frames_per_buffer\n", prg);
-  exit(1);
-}
+#include "producer.h"
+#include "consumer.h"
 
-int main(int argc, char* argv[])
-{
-  if (argc < 7) {
-    usage(argv[0]);
-  }
+#include <boost/thread.hpp>
 
-  std::string h5file = argv[1];
-  std::string immfile = argv[2];
-  std::string dataset = argv[3];
-  unsigned int buffer_count = atoi(argv[4]);
-  unsigned int frames = atoi(argv[5]);
-  unsigned int frames_per_buffer = atoi(argv[6]);
+// void usage(char* prg)
+// {
+//   printf("Usage: %s h5file immfile dataset_name buffer_count frames frames_per_buffer\n", prg);
+//   exit(1);
+// }
 
-  BufferPool *pool = new BufferPool(buffer_count, 1024, 1024, frames_per_buffer);
-  Queue<FrameBuffer*> *readconvert = new Queue<FrameBuffer*>();
-  Queue<FrameBuffer*> *convertwrite = new Queue<FrameBuffer*>();
+// int main(int argc, char* argv[])
+// {
+//   // if (argc < 7) {
+//   //   usage(argv[0]);
+//   // }
 
-  Reader *reader = new Reader(h5file, dataset, 1024, 1024, frames, frames_per_buffer, pool, readconvert);
-  Converter *converter = new Converter(readconvert, convertwrite);
-  Writer *writer = new Writer(immfile, convertwrite, pool);
+//   // std::string h5file = argv[1];
+//   // std::string immfile = argv[2];
+//   // std::string dataset = argv[3];
+//   // unsigned int buffer_count = atoi(argv[4]);
+//   // unsigned int frames = atoi(argv[5]);
+//   // unsigned int frames_per_buffer = atoi(argv[6]);
 
-  writer->start();
-  converter->start();
-  reader->start();
+//   // BufferPool *pool = new BufferPool(buffer_count, 1024, 1024, frames_per_buffer);
+//   // Queue<FrameBuffer*> *readconvert = new Queue<FrameBuffer*>();
+//   // Queue<FrameBuffer*> *convertwrite = new Queue<FrameBuffer*>();
 
-  while(1) usleep(10 * 1000);
-}
+//   // Reader *reader = new Reader(h5file, dataset, 1024, 1024, frames, frames_per_buffer, pool, readconvert);
+//   // Converter *converter = new Converter(readconvert, convertwrite);
+//   // //Writer *writer = new Writer(immfile, convertwrite, pool);
+
+//   // //writer->start();
+//   // converter->start();
+//   // reader->start();
+
+
+//   Queue<int> queue;
+//   Producer p(&queue);
+//   boost::thread thr ( boost::bind (&Producer::run, &p));
+
+//   //Consumer *c = new Consumer(&queue);
+
+//   //p->start();
+//   //c->start();
+
+
+//   //thr.join();
+
+//   printf("Done\n");
+//   //c->join();
+// }
