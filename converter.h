@@ -20,6 +20,7 @@ public:
 protected:
 
   void run();
+  void stop();
 
 private:
 
