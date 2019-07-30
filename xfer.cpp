@@ -34,12 +34,14 @@ int main(int argc, char* argv[])
   unsigned int buffer_count = atoi(argv[4]);
   unsigned int frames = atoi(argv[5]);
   unsigned int frames_per_buffer = atoi(argv[6]);
+  unsigned int dimX = atoi(argv[7]);
+  unsigned int dimY = atoi(argv[8]);
 
-  BufferPool *pool = new BufferPool(buffer_count, 1024, 1024, frames_per_buffer);
+  BufferPool *pool = new BufferPool(buffer_count, dimX, dimY, frames_per_buffer);
   Queue<FrameBuffer*> *readconvert = new Queue<FrameBuffer*>();
   Queue<FrameBuffer*> *convertwrite = new Queue<FrameBuffer*>();
 
-  Reader *reader = new Reader(h5file, dataset, 1024, 1024, frames, frames_per_buffer, pool, readconvert);
+  Reader *reader = new Reader(h5file, dataset, dimX, dimY, frames, frames_per_buffer, pool, readconvert);
   Converter *converter = new Converter(readconvert, convertwrite, frames);
   Writer *writer = new Writer(immfile, convertwrite, pool, frames);
 

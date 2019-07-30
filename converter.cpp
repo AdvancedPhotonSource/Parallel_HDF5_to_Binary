@@ -32,7 +32,7 @@ void Converter::run()
     unsigned int indexSparse = 0;
     
     // TODO: Remove hard coded value. 
-    unsigned int imgsize = 1024 * 1024;
+    unsigned int imgsize = 100 * 512;
 
     unsigned int totalpix = 0;
 

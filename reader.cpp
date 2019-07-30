@@ -31,19 +31,20 @@ Reader::~Reader()
 void Reader::setup()
 {
   
-  m_dims[0] = m_frames;
-  m_dims[1] = m_dimX;
-  m_dims[2] = m_dimY;
+  m_dims[0] = m_dimX;
+  m_dims[1] = m_dimY;
+  m_dims[2] = m_frames;
 
   // Chunking size
-  m_chunk[0] = 1;
+  m_chunk[0] = m_dims[0];
   m_chunk[1] = m_dims[1];
-  m_chunk[2] = m_dims[2];
+  m_chunk[2] = 1;
+
 
   // Size of hyperslab. 
-  m_count[0] = m_framesPerBuffer;
+  m_count[0] = m_dims[0];
   m_count[1] = m_dims[1];
-  m_count[2] = m_dims[2];
+  m_count[2] = m_framesPerBuffer;
 
   hid_t fileID = H5Fopen(m_filepath.c_str(), H5F_ACC_RDONLY, H5P_DEFAULT);
   m_datasetID = H5Dopen1(fileID, m_dataset.c_str());
@@ -61,25 +62,17 @@ void Reader::run()
   hid_t HDF5_datatype;
   HDF5_datatype = H5T_NATIVE_UINT16;
 
-  for (offset[0] = 0 ; offset[0] < m_frames; offset[0] += m_count[0])
+  for (offset[2] = 0 ; offset[2] < m_frames; offset[2] += m_count[2])
   {
     // Might block if there is no buffer in the pool. 
     FrameBuffer *buffer = m_pool->take();
     unsigned short *valuebuffer = buffer->getValueBuffer();
-    
+
     herr_t errstatus = H5Sselect_hyperslab(m_spaceID, H5S_SELECT_SET, offset, NULL, m_count, NULL);
     hid_t status = H5Dread(m_datasetID, HDF5_datatype, m_memspaceID, m_spaceID, H5P_DEFAULT, valuebuffer);
 
-    // printf("(Reader) Frame = %d\n", offset[0]);
-    // for ( int i = 0 ; i < 10; i++)
-    // {
-    //   printf("%d ", valuebuffer[i]);
-    // }
-
-    // printf("\n");
-    
     buffer->setStart(0);
-    buffer->setSize(m_dims[1] * m_dims[2] * m_count[0]);
+    buffer->setSize(m_dims[0] * m_dims[1] * m_count[2]);
     
     m_destQueue->push(buffer);
   }
