@@ -13,7 +13,7 @@ public:
   BufferPool(unsigned int size, 
              unsigned int dimX, 
              unsigned int dimY, 
-             unsigned int framesPerBuffer);
+             unsigned int headersize);
 
   ~BufferPool();
 
@@ -28,7 +28,7 @@ private:
   unsigned int m_countInUse;
   unsigned int m_dimX;
   unsigned int m_dimY;
-  unsigned int m_framesPerBuffer;
+  unsigned int m_headersize;
 
   std::queue<FrameBuffer *> m_bufferQueue;
 

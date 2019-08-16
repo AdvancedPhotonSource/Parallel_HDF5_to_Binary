@@ -19,9 +19,9 @@ public:
          unsigned int dimX, 
          unsigned int dimY,
          unsigned int frames,
-         unsigned int framesPerBuffer,
          BufferPool *pool,
-         Queue<FrameBuffer *> *destQueue);
+         Queue<FrameBuffer *> *destQueue,
+	 unsigned int stframe);
 
   ~Reader();
 
@@ -37,7 +37,6 @@ private:
   unsigned int m_dimX;
   unsigned int m_dimY;
   unsigned int m_frames;
-  unsigned int m_framesPerBuffer;
 
   BufferPool *m_pool;
   Queue<FrameBuffer *> *m_destQueue;
@@ -49,7 +48,8 @@ private:
   hid_t m_datasetID;
   hid_t m_spaceID;
   hid_t m_memspaceID;
-
+   unsigned int m_stframe;
+   
   void setup();
 
 };

@@ -2,6 +2,8 @@
 #define CONVERTER_H
 
 #include "thread.h"
+#include "imm_file.h"
+#include "bufferpool.h"
 
 template <typename T>
 class Queue;
@@ -10,24 +12,33 @@ class FrameBuffer;
 class Converter : public Thread
 {
 public: 
-
+//readconvert, convertwrite, poolread,poolwrite,frames
   Converter(Queue<FrameBuffer *> *srcQueue, 
             Queue<FrameBuffer *> *destQueu,
-            unsigned int frames);
+	    BufferPool *readpool,
+	    BufferPool *writepool,
+            unsigned int frames,
+	    unsigned int is_comp,
+	    unsigned int threshold);
 
   ~Converter();
 
 protected:
 
   void run();
-  void stop();
 
 private:
 
   Queue<FrameBuffer *> *m_srcQueue;
   Queue<FrameBuffer *> *m_destQueue;
-
+  BufferPool *m_readpool;
+  BufferPool *m_writepool;
   unsigned int m_frames;
+  
+  unsigned int m_threshold;
+  unsigned int m_is_comp;
+  
+  imm_file *my_imm;
 
 };
 

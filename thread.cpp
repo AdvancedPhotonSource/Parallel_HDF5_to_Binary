@@ -9,7 +9,6 @@ Thread::Thread()
 
 Thread::~Thread()
 {
-  printf("Thread dead!\n");
 }
 
 void Thread::interrupt()
@@ -49,7 +48,6 @@ void Thread::stop()
     // Wait for thread to finish
     m_thread->timed_join(timeout);
   }
- 
    m_running = false; 
 }
 

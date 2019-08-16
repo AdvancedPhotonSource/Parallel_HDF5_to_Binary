@@ -4,11 +4,11 @@
 BufferPool::BufferPool(unsigned int size, 
                       unsigned int dimX,
                       unsigned int dimY,
-                      unsigned int framesPerBuffer)
+                      unsigned int headersize)
 : m_size(size),
   m_dimX(dimX),
   m_dimY(dimY),
-  m_framesPerBuffer(framesPerBuffer)
+  m_headersize(headersize)
 {
   alloc();
 }
@@ -22,7 +22,7 @@ void BufferPool::alloc()
 {
   for (unsigned int i = 0 ; i < m_size ; i++)
   {
-    FrameBuffer* fbuffer = new FrameBuffer(m_dimX, m_dimY, m_framesPerBuffer);
+    FrameBuffer* fbuffer = new FrameBuffer(m_dimX, m_dimY, m_headersize);
     m_bufferQueue.push(fbuffer);  
   }
   
