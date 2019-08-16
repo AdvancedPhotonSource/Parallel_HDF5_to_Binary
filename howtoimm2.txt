@@ -1,0 +1,129 @@
+Script started on Fri 28 Mar 2014 03:35:50 PM CDT
+]0;xpcs8@hpcs08:~[xpcs8@hpcs08 ~]$ cd h52imm
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./h5ls /data/tmadden/series_29_master.h5
+/data/tmadden/series_29_master.h5
+ 
+/ 
+    <class 'h5py._hl.files.File'>
+    Attributes:
+ 
+/entry/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+    NX_class 		 NXEntry
+ 
+/entry/data_000003/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 3000
+    image_nr_high 		 3999
+ 
+/entry/data_000007/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 7000
+    image_nr_high 		 7999
+ 
+/entry/data_000001/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 1000
+    image_nr_high 		 1999
+ 
+/entry/data_000008/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 8000
+    image_nr_high 		 8999
+ 
+/entry/data_000009/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 9000
+    image_nr_high 		 9999
+ 
+/entry/instrument/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+ 
+/entry/instrument/detector/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+ 
+/entry/instrument/monochromator/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+ 
+/entry/data_000006/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 6000
+    image_nr_high 		 6999
+ 
+/entry/data_000005/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 5000
+    image_nr_high 		 5999
+ 
+/entry/data_000000/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 0
+    image_nr_high 		 999
+ 
+/entry/data_000004/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 4000
+    image_nr_high 		 4999
+ 
+/entry/data_000002/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class 		 NXdata
+    image_nr_low 		 2000
+    image_nr_high 		 2999
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ 
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm ser[K[K[K/data/tmadden/series_29 0
+./h52imm /data/tmadden/series_29_data_000000.h5 /data/tmadden/series_29_d000000 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm /data/tmadden/series_29 0[K1
+./h52imm /data/tmadden/series_29_data_000001.h5 /data/tmadden/series_29_d000001 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm /data/tmadden/series_29 1[K3[K2
+./h52imm /data/tmadden/series_29_data_000002.h5 /data/tmadden/series_29_d000002 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm /data/tmadden/series_29 2[K3
+./h52imm /data/tmadden/series_29_data_000003.h5 /data/tmadden/series_29_d000003 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm /data/tmadden/series_29 3[K4
+./h52imm /data/tmadden/series_29_data_000004.h5 /data/tmadden/series_29_d000004 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ ./himm /data/tmadden/series_29 4[K5
+./h52imm /data/tmadden/series_29_data_000005.h5 /data/tmadden/series_29_d000005 data 1000 1030 1065 1 0
+OPened output file -
+Done
+]0;xpcs8@hpcs08:~/h52imm[xpcs8@hpcs08 ~/h52imm]$ eixt[K[K[Kxit
+exit
+
+Script done on Fri 28 Mar 2014 03:37:55 PM CDT

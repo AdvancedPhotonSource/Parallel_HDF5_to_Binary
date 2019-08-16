@@ -1,0 +1,111 @@
+A first attempt to write a multi-threaded version of HDF5 (with L4Z compression) to IMM file format. This version was
+only compiled to run on Linux. 
+
+Dependencies
+-------------
+
+1. Boost (tested with version 1.53)
+2. HDF5 (tested with version 1.8.12)
+
+In additiona to above two libraries, if you are reading a HDF5 dataset compressed with LZ4 compression, you
+need to do an extra step of getting the LZ4 compression plugin installed. Here is one way to do so:
+
+Download from github - https://github.com/michaelrissi/HDF5Plugin.git
+
+Compile it and then define the HDF5_PLUGIN_PATH to the folder containing the lz4 plugin lib. 
+
+We have the HDF5 plugin in the svn under DectrisFileReader. Also there are some example codes etc...
+
+Compilation
+------------
+
+After specifying the path to the boost and hdf5 libraries
+
+make -j
+
+Running
+---------
+
+Run the python scripts to run the software. these are run as unix scripts. the unix scripts call 
+enthought python on /APSShare. The python will parse the hdf 5 file, get image specs etc, then it will
+call the c program h52imm binary to generate imm files.
+
+To list contents of h5 file:
+
+cd h52imm
+./h5ls series_4_master.h5
+
+You will get the output as such:
+/ 
+    <class 'h5py._hl.files.File'>
+    Attributes:
+ 
+/entry/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+    NX_class             NXEntry
+ 
+/entry/instrument/ 
+    <class 'h5py._hl.group.Group'>
+    Attributes:
+ 
+/entry/data_000000/ 
+    <class 'h5py._hl.dataset.Dataset'>
+    Attributes:
+    NX_class             NXdata
+    image_nr_low                 0
+    image_nr_high                9
+
+
+
+To convert h5 to imm do this:
+
+./himm series_4
+The script will read series_4_master.h5, to get number of images etc. series_4_data_000000.h5 will be read to get
+the actial images. The file series_4_00000-00010.imm will be generated.
+
+
+
+
+
+
+
+
+
+
+
+
+Set the LD_LIBRARY_PATH if necessary:
+In maddens; home directory the envs look like this. 
+
+setenv LD_LIBRARY_PATH /home/oxygen26/TMADDEN/swWork/hdf5/hdf5-1.8.12-linux-x86_64-shared/lib
+setenv LD_LIBRARY_PATH {$LD_LIBRARY_PATH}:/home/oxygen26/TMADDEN/swWork/boost/boost155Install/lib
+setenv HDF5_PLUGIN_PATH /home/oxygen26/TMADDEN/swWork/hdf5/HDF5Plugin-master
+
+
+In the installation on hpcs08.xray, the paths are
+
+setenv LD_LIBRARY_PATH /clhome/XPCS8/hdf5/hdf5-1.8.12-linux-x86_64-shared/lib
+setenv LD_LIBRARY_PATH {$LD_LIBRARY_PATH}:/clhome/XPCS8/hdf5/boost155Install/lib
+setenv HDF5_PLUGIN_PATH /clhome/XPCS8/hdf5/HDF5Plugin-master
+
+
+In the file, himm, these paths are set.
+
+
+
+Run ./h52imm to see the usage information
+
+Usage: ./h52imm h5file immfile dataset_name buffer_count frames frames_per_buffer
+
+The parameters are explained below:
+
+h5file - The path to the input file
+immfile - The path to output immfile that needs to get generated, an existing file currently gets overwritten (fix?)
+dataset_name - Name (path) of the hdf5 dataset that contains the image data
+buffer_count - Total number of buffers to create in the buffer pool.
+frames - Total number of frames to read from the file. This option currently needs to be a number less than or equal to the total frames
+          in the hdf5 file. 
+frames_per_buffer - The size of individual buffer in the buffer pool is computed by multiplying this number with the size of a single image.
+                    The size of the image is currently hard coded to (1K by 1K). The buffer size would be: 1024 x 1024 x frames_per_buffer
+

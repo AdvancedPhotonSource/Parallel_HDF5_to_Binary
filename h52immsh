@@ -1,0 +1,8 @@
+#!/bin/tcsh
+
+setenv LD_LIBRARY_PATH /clhome/XPCS8/hdf5/hdf5-1.8.12-linux-x86_64-shared/lib
+setenv LD_LIBRARY_PATH {$LD_LIBRARY_PATH}:/clhome/XPCS8/hdf5/boost155Install/lib
+setenv HDF5_PLUGIN_PATH /clhome/XPCS8/hdf5/HDF5Plugin-master
+
+
+./h52imm $1 $2 data $3 $4 $5 1 0 $6 $7 $8
